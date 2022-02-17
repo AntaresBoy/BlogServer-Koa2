@@ -13,13 +13,10 @@ router.post('/login', async (ctx, next) => {
     username,
     password
   } = ctx.request.body
-  console.log("login", username, password)
   const result = await login(username, password)
-  console.log("result", result)
   if (result.username) {
     ctx.session.username = result.username
     ctx.session.realname = result.realname
-    console.log("result1111", ctx.session)
     ctx.body = new SuccessModel()
     return;
   }
@@ -27,7 +24,6 @@ router.post('/login', async (ctx, next) => {
 })
 
 router.get('/session-test', async (ctx, next) => {
-  console.log("session-test", ctx.session)
   if (ctx.session.viewCount == null) {
     ctx.session.viewCount = 0
   }
