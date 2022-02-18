@@ -46,6 +46,7 @@ const newBlog = async (newBlogData) => {
   values ("${title}","${content}","${createtime}","${author}","${tags}","${contentId}");
   `
   console.log("newBlog",sql,newBlogData)
+  console.log("result:",result)
   const result = await sqlExecutor(sql)
   result.insertId = contentId
   return {
@@ -61,6 +62,7 @@ const updateBlog = async (blogData = {}) => {
   if (title && content && contentId) {
     const sql = `update ${DB_NAME.blogs} set title="${title}",tags="${tags}", content="${content}" where contentId="${contentId}";`
     const result = await sqlExecutor(sql)
+    console.log("result:",result)
     return result.affectedRows > 0 ? true : false;
   }
   if (contentId && !title && !content) {
@@ -73,6 +75,7 @@ const deleteBlog = async (contentId, author) => {
   const sql = `delete from ${DB_NAME.blogs} where contentId='${contentId}' and author=${author};`
   console.log("deleteBlog",sql,author)
   const result = await sqlExecutor(sql)
+  console.log("result:",result)
   return result.affectedRows > 0 ? true : false
 }
 
