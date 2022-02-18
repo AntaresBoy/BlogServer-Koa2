@@ -72,7 +72,7 @@ const updateBlog = async (blogData = {}) => {
 
 
 const deleteBlog = async (contentId, author) => {
-  const sql = `delete from ${DB_NAME.blogs} where contentId='${contentId}' and author=${author};`
+  const sql = `delete from ${DB_NAME.blogs} where contentId="${contentId}" and author="${author}";`
   console.log("deleteBlog",sql,author)
   const result = await sqlExecutor(sql)
   console.log("result:",result)
