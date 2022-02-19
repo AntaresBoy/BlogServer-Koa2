@@ -23,6 +23,7 @@ router.get('/list', loginCheck, async (ctx, next) => {
   // }
   console.log("getList-ctx.query:", ctx.query, ctx.session)
   const result = await getList(author, keyword)
+  console.log("getList-result:", result)
   ctx.body = new SuccessModel(result)
 })
 
