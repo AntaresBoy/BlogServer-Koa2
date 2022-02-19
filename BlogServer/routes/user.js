@@ -1,5 +1,6 @@
 const {
-  login
+  login,
+  register
 } = require('../controllor/user')
 const {
   ErrorModel,
@@ -20,7 +21,20 @@ router.post('/login', async (ctx, next) => {
     ctx.body = new SuccessModel()
     return;
   }
-  ctx.body = new ErrorModel('登录失败')
+  ctx.body = new ErrorModel('登录失败！')
+})
+
+router.post('/register',async ()=>{
+  const {
+    username,
+    password
+  } = ctx.request.body
+  const result = await register(username, password)
+  if(result){
+    ctx.body = new SuccessModel()
+    return
+  }
+  ctx.body = new ErrorModel('注册失败！')
 })
 
 router.get('/session-test', async (ctx, next) => {
