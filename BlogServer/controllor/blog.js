@@ -19,18 +19,19 @@ const getList = async (author, keyword) => {
   if (keyword && keyword !== "undefined") {
     sql += `and title like "%${keyword}%" `
   }
+  sql+=`and isDeleted=0 `
   sql += `order by createtime desc;`
   return await sqlExecutor(sql)
 }
 
 const getDetail = async (title) => {
-  let sql = `select * from ${DB_NAME.blogs} where title="${title}"`
+  let sql = `select * from ${DB_NAME.blogs} where title="${title}" and isDeleted=0;`
   const result = await sqlExecutor(sql)
   return result[0]
 }
 
 const getDetailById = async (contentId) => {
-  let sql = `select * from ${DB_NAME.blogs} where contentId='${contentId}'`
+  let sql = `select * from ${DB_NAME.blogs} where contentId='${contentId}' and isDeleted=0;`
   const result = await sqlExecutor(sql)
   return result[0]
 }
@@ -73,7 +74,8 @@ const updateBlog = async (blogData = {}) => {
 
 
 const deleteBlog = async (contentId, author) => {
-  const sql = `delete from ${DB_NAME.blogs} where contentId="${contentId}" and author="${author}";`
+  // const sql = `delete from ${DB_NAME.blogs} where contentId="${contentId}" and author="${author}";`
+  const sql = `update ${DB_NAME.blogs} set isDeleted=1 where contentId="${contentId}" and author="${author}";`
   console.log("deleteBlog:",sql,author)
   const result = await sqlExecutor(sql)
   console.log("result:",result)
