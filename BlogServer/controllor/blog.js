@@ -14,7 +14,7 @@ const {
 const getList = async (author, keyword) => {
   let sql = `select * from ${DB_NAME.blogs} where 1=1 `
   if (author) {
-    sql += `and author=${author} `
+    sql += `and author="${author}" `
   }
   if (keyword && keyword !== "undefined") {
     sql += `and title like "%${keyword}%" `
