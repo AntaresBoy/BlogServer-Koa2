@@ -12,7 +12,7 @@ const {
 } = require('../utils/index')
 
 const getList = async (author, keyword) => {
-  let sql = `select * from ${DB_NAME.blogs} where 1=1 `
+  let sql = `select id,title,createtime,author,tags,contentId,content from ${DB_NAME.blogs} where 1=1 `
   if (author) {
     sql += `and author="${author}" `
   }
