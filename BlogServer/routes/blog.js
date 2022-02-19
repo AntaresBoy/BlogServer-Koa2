@@ -14,14 +14,14 @@ router.prefix('/api/blog')
 router.get('/list', loginCheck, async (ctx, next) => {
   let author = ctx.query.author || ''
   const keyword = ctx.query.keyword || ''
-  if (ctx.query.isadmin) {
-    if (ctx.session.username == null) {
-      ctx.body = new ErrorModel('未登录')
-      return
-    }
-    author = ctx.session.username
+  // if (ctx.query.isadmin) {
+  if (ctx.session.username == null) {
+    ctx.body = new ErrorModel('未登录')
+    return
   }
-  console.log("getList-ctx.query:",ctx.query,ctx.session)
+  author = ctx.session.username
+  // }
+  console.log("getList-ctx.query:", ctx.query, ctx.session)
   const result = await getList(author, keyword)
   ctx.body = new SuccessModel(result)
 })
