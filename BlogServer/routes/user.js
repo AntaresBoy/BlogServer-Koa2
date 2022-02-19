@@ -24,7 +24,7 @@ router.post('/login', async (ctx, next) => {
   ctx.body = new ErrorModel('登录失败！')
 })
 
-router.post('/register',async ()=>{
+router.post('/register',async (ctx, next)=>{
   const {
     username,
     password
