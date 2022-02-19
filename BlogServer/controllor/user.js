@@ -19,8 +19,8 @@ const login = async (username, password) => {
 const register= async (username, password)=>{
   username = escape(username)
   password = escape(genPassword(password))
-  const realname=" "
-  const sql = `insert into ${DB_NAME.users} (username, password,realname) values (${username},${password},${realname});`
+  const realname=""
+  const sql = `insert into ${DB_NAME.users} (username, password,realname) values (${username},${password},"${realname}");`
   console.log("register:",sql)
   const result = await sqlExecutor(sql)
   console.log("result:",result)
