@@ -18,6 +18,7 @@ router.post('/login', async (ctx, next) => {
   if (result.username) {
     ctx.session.username = result.username
     ctx.session.realname = result.realname
+    console,log("login-result:",result)
     ctx.body = new SuccessModel()
     return;
   }

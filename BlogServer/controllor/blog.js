@@ -21,6 +21,7 @@ const getList = async (author, keyword) => {
   }
   sql+=`and isDeleted=0 `
   sql += `order by createtime desc;`
+  console.log("getList:",sql)
   return await sqlExecutor(sql)
 }
 
