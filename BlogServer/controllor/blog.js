@@ -90,6 +90,15 @@ const deleteBlog = async (contentId, author) => {
   return result.affectedRows > 0 ? true : false
 }
 
+const searchBlogs =async(keyword)=>{
+  const sql= `select id,title,createtime,author,tags,contentId,content from ${DB_NAME.blogs} where 1=1 and isDeleted=0 `
+  sql+=`and title like "%${keyword}%" or content like "%${keyword}%" or author like "%${keyword}%" order by createtime desc;`
+  console.log("searchBlogs:", sql, keyword)
+  const result = await sqlExecutor(sql)
+  console.log("result:", result)
+  return result
+}
+
 module.exports = {
   getList,
   getDetail,

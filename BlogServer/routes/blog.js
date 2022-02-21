@@ -69,4 +69,11 @@ router.delete('/delete', loginCheck, async (ctx, next) => {
   ctx.body = result ? new SuccessModel(result) : new ErrorModel('删除博客失败')
 })
 
+router.post('/search',loginCheck,async(ctx,next)=>{
+  const keyword=ctx.request.body.keyword
+  if(!keyword) return;
+  const result= await searchBlogs(keyword)
+  ctx.body=new SuccessModel(result)
+})
+
 module.exports = router
