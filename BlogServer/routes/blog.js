@@ -71,7 +71,9 @@ router.delete('/delete', loginCheck, async (ctx, next) => {
 })
 
 router.post('/search',loginCheck,async(ctx,next)=>{
-  const keyword=ctx.request.body.keyWord
+  let keyword=ctx.request.body.keyword
+  console.log("seaarch......",keyword,ctx.request.body)
+  if(!keyword) return await getAllBlogs()
   const result= await searchBlogs(keyword)
   ctx.body=new SuccessModel(result)
 })
