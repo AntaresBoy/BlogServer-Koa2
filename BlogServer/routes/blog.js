@@ -10,7 +10,8 @@ const {
   updateBlog,
   getDetailById,
   deleteBlog,
-  getAllBlogs
+  getAllBlogs,
+  searchBlogs
 } = require('../controllor/blog')
 const router = require('koa-router')()
 

@@ -106,5 +106,6 @@ module.exports = {
   updateBlog,
   deleteBlog,
   getDetailById,
-  getAllBlogs
+  getAllBlogs,
+  searchBlogs
 }
