@@ -72,6 +72,7 @@ router.delete('/delete', loginCheck, async (ctx, next) => {
 
 router.post('/search',loginCheck,async(ctx,next)=>{
   const keyword=ctx.request.body.keyword
+  console.log("search......",ctx.request.body,keyword)
   const result= await searchBlogs(keyword)
   ctx.body=new SuccessModel(result)
 })
