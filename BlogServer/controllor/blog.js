@@ -11,6 +11,7 @@ const {
   toLiteral
 } = require('../utils/index')
 
+//根据当前用户获取该用户所有文章列表
 const getList = async (author, keyword) => {
   let sql = `select id,title,createtime,author,tags,contentId,content from ${DB_NAME.blogs} where 1=1 `
   if (author) {
@@ -19,9 +20,15 @@ const getList = async (author, keyword) => {
   if (keyword && keyword !== "undefined") {
     sql += `and title like "%${keyword}%" `
   }
-  sql+=`and isDeleted=0 `
+  sql += `and isDeleted=0 `
   sql += `order by createtime desc;`
-  console.log("getList:",sql)
+  console.log("getList:", sql)
+  return await sqlExecutor(sql)
+}
+
+//获取所有文章列表
+const getAllBlogs = async () => {
+  let sql = `select id,title,createtime,author,tags,contentId,content from ${DB_NAME.blogs} where 1=1 and isDeleted=0 order by createtime desc;`
   return await sqlExecutor(sql)
 }
 
@@ -47,9 +54,9 @@ const newBlog = async (newBlogData) => {
   const sql = `insert into ${DB_NAME.blogs} (title,content,createtime,author,tags,contentId)
   values ("${title}","${content}","${createtime}","${author}","${tags}","${contentId}");
   `
-  console.log("newBlogData:",newBlogData)
+  console.log("newBlogData:", newBlogData)
   const result = await sqlExecutor(sql)
-  console.log("newBlog:",sql,result)
+  console.log("newBlog:", sql, result)
   result.insertId = contentId
   return {
     id: result.insertId
@@ -64,8 +71,8 @@ const updateBlog = async (blogData = {}) => {
   if (title && content && contentId) {
     const sql = `update ${DB_NAME.blogs} set title="${title}",tags="${tags}", content="${content}" where contentId="${contentId}";`
     const result = await sqlExecutor(sql)
-    console.log("blogData:",blogData)
-    console.log("result:",result,sql)
+    console.log("blogData:", blogData)
+    console.log("result:", result, sql)
     return result.affectedRows > 0 ? true : false;
   }
   if (contentId && !title && !content) {
@@ -77,9 +84,9 @@ const updateBlog = async (blogData = {}) => {
 const deleteBlog = async (contentId, author) => {
   // const sql = `delete from ${DB_NAME.blogs} where contentId="${contentId}" and author="${author}";`
   const sql = `update ${DB_NAME.blogs} set isDeleted=1 where contentId="${contentId}" and author="${author}";`
-  console.log("deleteBlog:",sql,author)
+  console.log("deleteBlog:", sql, author)
   const result = await sqlExecutor(sql)
-  console.log("result:",result)
+  console.log("result:", result)
   return result.affectedRows > 0 ? true : false
 }
 
@@ -89,5 +96,6 @@ module.exports = {
   newBlog,
   updateBlog,
   deleteBlog,
-  getDetailById
+  getDetailById,
+  getAllBlogs
 }

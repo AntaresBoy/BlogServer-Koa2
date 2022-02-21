@@ -1,5 +1,8 @@
 const loginCheck = require('../middleware/loginCheck')
-const { ErrorModel, SuccessModel } = require('../model/resModel')
+const {
+  ErrorModel,
+  SuccessModel
+} = require('../model/resModel')
 const {
   getList,
   getDetail,
@@ -7,6 +10,7 @@ const {
   updateBlog,
   getDetailById,
   deleteBlog,
+  getAllBlogs
 } = require('../controllor/blog')
 const router = require('koa-router')()
 
@@ -24,6 +28,15 @@ router.get('/list', loginCheck, async (ctx, next) => {
   console.log("getList-ctx.query:", ctx.query, ctx.session)
   const result = await getList(author, keyword)
   console.log("getList-result:", result)
+  ctx.body = new SuccessModel(result)
+})
+
+router.get('/all-blogs', loginCheck, async (ctx, next) => {
+  if (!ctx.session.username) {
+    ctx.body = new ErrorModel('未登录')
+    return
+  }
+  const result = await getAllBlogs()
   ctx.body = new SuccessModel(result)
 })
 
