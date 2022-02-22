@@ -1,0 +1,104 @@
+2022-02-22 20:33:23:   <-- GET /api/blog/list
+2022-02-22 20:33:23: getList-ctx.query: [Object: null prototype] {} {
+  cookie: {
+    path: '/',
+    httpOnly: true,
+    maxAge: { KEYS: [Array], MAX_AGE: 86400000 },
+    overwrite: true,
+    signed: true
+  },
+  username: '10260315'
+}
+2022-02-22 20:33:23: getList: select id,title,createtime,author,tags,contentId,content from ids_blogs where 1=1 and author="10260315" and isDeleted=0 order by createtime desc;
+2022-02-22 20:33:23: getList-result: [
+  RowDataPacket {
+    id: 15,
+    title: 'ts总结',
+    createtime: '2022-02-17 14:23:10',
+    author: '10260315',
+    tags: 'CSS,React',
+    contentId: 'b0098dd81868448fa9254c533986a4ae',
+    content: '# 1、优点\n' +
+      '\n' +
+      '代码的可读性和可维护性：举个看后端某个接口返回值，一般需要去network看or去看接口文档，才知道返回数据结构，而正确用了ts后，编辑器会提醒接口返回值的类型，这点相当实用。\n' +
+      '在编译阶段就发现大部分错误，避免了很多线上bug\n' +
+      '增强了编辑器和 IDE 的功能，包括代码补全、接口提示、跳转到定义、重构等...\n' +
+      '\n' +
+      '# 2、缺点\n' +
+      '\n' +
+      '有一定的学习成本，需要理解接口（Interfaces）、泛型（Generics）、类（Classes）、枚举类型（Enums）等前端工程师可能不是很熟悉的概念\n' +
+      '会增加一些开发成本，当然这是前期的，后期维护更简单了\n' +
+      '一些JavaScript库需要兼容，提供声明文件，像vue2，底层对ts的兼容就不是很好。\n' +
+      'ts编译是需要时间的，这就意味着项目大了以后，开发环境启动和生产环境打包的速度就成了考验\n' +
+      '可以看看Deno 内部代码将停用 TypeScript，并公布五项具体理由\n' +
+      '\n' +
+      '或多或少，听到过的开发体验最好的架构：React Hooks + TypeScript。目前也在用，还在学习中，至于到底好不好，我还是对vue\n' +
+      '情有独钟。前端还在快速发展中，后面再出来个xxxScript，谁也说不好。所以一个字：学！\n' +
+      '三、anyScript\n' +
+      '可能因为业务场景或者业务紧张，or某个跑路的大哥省了点功夫，用了typeScript的项目也可能会变成anyScript。以下是几种救急的方式（大哥们还没有其他办法）：\n' +
+      '\n' +
+      '// @ts-nocheck 禁用整个文件的ts校验\n' +
+      '// @ts-ignore 禁用单行ts校验\n' +
+      'any和unknown\n' +
+      '\n' +
+      '不建议多用，但也不是不能用，有些场景确实不好写ts定义。这个时候就不要硬憋自己了，写个备注any下。\n' +
+      '\n' +
+      '抛个面试题：你知道any和unknown的区别吗？\n' +
+      '\n' +
+      '回归正题，开始学习，总结一些项目中使用较多的，一些TS高级特性这里就不说了。\n' +
+      '# 3、ts类型\n' +
+      '1、基础类型\n' +
+      '常用：boolean、number、string、array、enum、any、void\n' +
+      '不常用：tuple、null、undefined、never\n' +
+      '2、对象类型\n' +
+      '简单理解interface 和 type 的区别：type 更强大，interface 可以进行声明合并，type 不行；\n' +
+      '看个人习惯，一般声明都用interface，需要用到其他变量类型，type多一些。\n'
+  },
+  RowDataPacket {
+    id: 14,
+    title: 'typescript必知必会',
+    createtime: '2022-02-17 11:08:22',
+    author: '10260315',
+    tags: 'HTML,CSS,JavaScript',
+    contentId: '2aacef0f35804f53b8360d7ebcc5a409',
+    content: '# 1、优点\n' +
+      '代码的可读性和可维护性：举个看后端某个接口返回值，一般需要去network看or去看接口文档，才知道返回数据结构，而正确用了ts后，编辑器会提醒接口返回值的类型，这点相当实用。\n' +
+      '在编译阶段就发现大部分错误，避免了很多线上\n' +
+      '增强了编辑器和 IDE 的功能，包括代码补全、接口提示、跳转到定义、重构等\n' +
+      '"\n' +
+      '``` js\n' +
+      'console.log(1111)\n' +
+      '```\n' +
+      '# 2、缺点\n' +
+      '\n' +
+      '有一定的学习成本，需要理解接口（Interfaces）、泛型（Generics）、类（Classes）、枚举类型（Enums）等前端工程师可能不是很熟悉的概念\n' +
+      '会增加一些开发成本，当然这是前期的，后期维护更简单了\n' +
+      '一些JavaScript库需要兼容，提供声明文件，像vue2，底层对ts的兼容就不是很好。\n' +
+      'ts编译是需要时间的，这就意味着项目大了以后，开发环境启动和生产环境打包的速度就成了考验\n' +
+      '可以看看Deno 内部代码将停用 TypeScript，并公布五项具体理由\n' +
+      '\n' +
+      '或多或少，听到过的开发体验最好的架构：React Hooks + TypeScript。目前也在用，还在学习中，至于到底好不好，我还是对vue\n' +
+      '情有独钟。前端还在快速发展中，后面再出来个xxxScript，谁也说不好。所以一个字：学！\n' +
+      '三、anyScript\n' +
+      '可能因为业务场景或者业务紧张，or某个跑路的大哥省了点功夫，用了typeScript的项目也可能会变成anyScript。以下是几种救急的方式（大哥们还没有其他办法）：\n' +
+      '\n' +
+      '// @ts-nocheck 禁用整个文件的ts校验\n' +
+      '// @ts-ignore 禁用单行ts校验\n' +
+      'any和unknown\n' +
+      '\n' +
+      '不建议多用，但也不是不能用，有些场景确实不好写ts定义。这个时候就不要硬憋自己了，写个备注any下。\n' +
+      '\n' +
+      '抛个面试题：你知道any和unknown的区别吗？\n' +
+      '\n' +
+      '回归正题，开始学习，总结一些项目中使用较多的，一些TS高级特性这里就不说了。\n' +
+      '# 3、ts类型\n' +
+      '1、基础类型\n' +
+      '常用：boolean、number、string、array、enum、any、void\n' +
+      '不常用：tuple、null、undefined、never\n' +
+      '2、对象类型\n' +
+      '简单理解interface 和 type 的区别：type 更强大，interface 可以进行声明合并，type 不行；\n' +
+      '看个人习惯，一般声明都用interface，需要用到其他变量类型，type多一些。\n' +
+      '\n'
+  }
+]
+2022-02-22 20:33:23:   --> GET /api/blog/list 200 17ms 4.94kb

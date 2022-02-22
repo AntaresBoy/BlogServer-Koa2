@@ -70,12 +70,11 @@ router.delete('/delete', loginCheck, async (ctx, next) => {
   ctx.body = result ? new SuccessModel(result) : new ErrorModel('删除博客失败')
 })
 
-router.post('/search',loginCheck,async(ctx,next)=>{
-  let keyword=ctx.request.body.keyword
-  console.log("seaarch......",keyword,ctx.request.body)
-  if(!keyword) return await getAllBlogs()
-  const result= await searchBlogs(keyword)
-  ctx.body=new SuccessModel(result)
+router.post('/search', loginCheck, async (ctx, next) => {
+  let keyword = ctx.request.body.keyword
+  console.log("seaarch......", keyword, ctx.request.body)
+  const result = await searchBlogs(keyword)
+  ctx.body = new SuccessModel(result)
 })
 
 module.exports = router

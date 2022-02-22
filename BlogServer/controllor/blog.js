@@ -93,8 +93,9 @@ const deleteBlog = async (contentId, author) => {
 const searchBlogs = async (keyword) => {
   let sql = `select id,title,createtime,author,tags,contentId,content from ${DB_NAME.blogs} where 1=1 and isDeleted=0 `
   sql += `and (title like "%${keyword}%" or content like "%${keyword}%" or author like "%${keyword}%") order by createtime desc;`
-  console.log("searchBlogs:", sql, keyword)
-  const result = await sqlExecutor(sql)
+  if (!keyword) return getAllBlogs();
+  console.log("searchBlogs:", sql, keyword);
+  const result = await sqlExecutor(sql);
   console.log("result:", result)
   return result
 }
