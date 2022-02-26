@@ -43,5 +43,6 @@ jobs:
          username: ${{ secrets.ALIYUN_REMOTE_USER }}
          key: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
          script: |
-          cd ${{ secrets.ALIYUN_DATA_TARGET }}
-          mkdir test  
+          cd ${{ secrets.ALIYUN_TARGET }}
+          pwd
+          mkdir test11  
