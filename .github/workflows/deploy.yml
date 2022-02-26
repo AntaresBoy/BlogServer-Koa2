@@ -45,4 +45,5 @@ jobs:
          script: |
           cd ${{ secrets.ALIYUN_TARGET }}
           git pull
-          mkdir test 
+          pm2 stop all
+          npm run prd 
