@@ -46,5 +46,5 @@ jobs:
           cd ${{ secrets.ALIYUN_TARGET }}
           pm2 stop www
           git pull
-          npm run prd
+          npm run pm2
           pm2 list 
