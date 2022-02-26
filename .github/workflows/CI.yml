@@ -1,0 +1,47 @@
+name: deploy to aliyun-server
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 切换分支
+      - name: Checkout
+        uses: actions/checkout@master
+      # 下载 git submodule
+      - uses: srt32/git-actions@v0.0.3
+        with:
+          args: git submodule update --init --recursive
+      # 使用 根据自己的情况选择node版本，这里用node:12
+      - name: use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+           # npm install and build
+      - name: npm install and build
+        run: |
+          npm install
+        env:
+          CI: true
+      # Deploy to aliyun
+      - name: Deploy to aliyun server
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
+          ARGS: "-avzr --delete"
+          SOURCE: "./node_modules"
+          REMOTE_HOST: ${{ secrets.ALIYUN_SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.ALIYUN_REMOTE_USER }}
+          TARGET: ${{ secrets.ALIYUN_TARGET }}
+      # start json-server
+      - name: Start Server
+        uses: appleboy/ssh-action@master
+        with:
+         host: ${{ secrets.ALIYUN_SERVER_HOST }}
+         username: ${{ secrets.ALIYUN_REMOTE_USER }}
+         key: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
+         script: |
+          cd ${{ secrets.ALIYUN_TARGET }}
+          ./restart.sh 
