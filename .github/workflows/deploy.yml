@@ -1,4 +1,4 @@
-name: deploy to aliyun
+name: deploy to aliyun-server
 on:
   push:
     branches:
@@ -20,10 +20,9 @@ jobs:
         with:
           node-version: 12
       # npm install and build
-      - name: npm install and build
+      - name: npm install
         run: |
           npm install
-          npm run build
         env:
           CI: true
       # Deploy to aliyun
@@ -31,8 +30,13 @@ jobs:
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
-          ARGS: "-avzr --delete"
-          SOURCE: "dist/"
+          # ARGS: "-avzr --delete"
+          # SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.ALIYUN_SERVER_HOST }}
           REMOTE_USER: ${{ secrets.ALIYUN_REMOTE_USER }}
-          TARGET: ${{ secrets.ALIYUN_TARGET }}
+          # TARGET: ${{ secrets.ALIYUN_TARGET }}
+      - name: Start Server
+        run: |
+          cd /home/server
+          mkdir test
+        
