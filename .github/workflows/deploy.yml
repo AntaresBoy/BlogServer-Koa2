@@ -37,6 +37,5 @@ jobs:
           # TARGET: ${{ secrets.ALIYUN_TARGET }}
       - name: Start Server
         run: |
-          cd /home/server
-          mkdir test
+          mkdir test111
         
