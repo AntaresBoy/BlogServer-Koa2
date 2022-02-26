@@ -18,11 +18,7 @@ jobs:
       - name: use Node.js 12
         uses: actions/setup-node@v1
         with:
-          node-version: 12
-      # npm install and build
-      - name: npm install
-        run: |
-          npm install
+          node-version: 17.4.0
         env:
           CI: true
       # Deploy to aliyun
