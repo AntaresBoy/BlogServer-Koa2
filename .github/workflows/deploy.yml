@@ -18,7 +18,11 @@ jobs:
       - name: use Node.js 12
         uses: actions/setup-node@v1
         with:
-          node-version: 17.4.0
+          node-version: 12
+           # npm install and build
+      - name: npm install and build
+        run: |
+          npm install
         env:
           CI: true
       # Deploy to aliyun
@@ -27,7 +31,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
           ARGS: "-avzr --delete"
-          # SOURCE: "/BlogServer-Koa2/*"
+          SOURCE: "./node_modules"
           REMOTE_HOST: ${{ secrets.ALIYUN_SERVER_HOST }}
           REMOTE_USER: ${{ secrets.ALIYUN_REMOTE_USER }}
           TARGET: ${{ secrets.ALIYUN_TARGET }}
@@ -40,6 +44,4 @@ jobs:
          key: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
          script: |
           cd ${{ secrets.ALIYUN_TARGET }}
-          npm install
-          pm2 stop all
-          npm run prd 
+          mkdir test 
