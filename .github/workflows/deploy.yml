@@ -44,4 +44,5 @@ jobs:
          key: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
          script: |
           cd ${{ secrets.ALIYUN_TARGET }}
+          git pull
           mkdir test 
