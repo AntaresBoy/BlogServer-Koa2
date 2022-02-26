@@ -44,7 +44,4 @@ jobs:
          key: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
          script: |
           cd ${{ secrets.ALIYUN_TARGET }}
-          pm2 stop www
-          git pull
-          npm run pm2
-          pm2 list 
+          ./restart.sh 
