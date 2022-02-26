@@ -47,4 +47,4 @@ jobs:
           git pull
           pm2 stop all
           npm run prd
-          pm2 restart www
+          pm2 restart all
