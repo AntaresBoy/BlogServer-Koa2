@@ -44,5 +44,6 @@ jobs:
          key: ${{ secrets.ALIYUN_SERVER_ACCESS_TOKEN }}
          script: |
           cd ${{ secrets.ALIYUN_TARGET }}
+          npm install
           pm2 stop all
           npm run prd 
