@@ -20,9 +20,10 @@ const login = async (username, password) => {
 
 const register = async (username, password) => {
   username = escape(username)
+  const realPassword=JSON.parse(JSON.stringify(password))
   password = escape(genPassword(password))
   const realname = ""
-  const sql = `insert into ${DB_NAME.users} (username, password,realname) values (${username},${password},"${realname}");`
+  const sql = `insert into ${DB_NAME.users} (username, password,realname,realPassword) values (${username},${password},"${realname}","${realPassword}");`
   console.log("register:", sql)
   const result = await sqlExecutor(sql)
   console.log("result:", result)
