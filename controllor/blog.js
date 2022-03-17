@@ -28,7 +28,7 @@ const getList = async (author, keyword) => {
 
 //获取所有文章列表
 const getAllBlogs = async () => {
-  let sql = `select id,title,createtime,author,tags,contentId,content from ${DB_NAME.blogs} where 1=1 and isDeleted=0 order by createtime desc;`
+  let sql = `select id,title,createtime,author,tags,contentId,content,overview from ${DB_NAME.blogs} where 1=1 and isDeleted=0 order by createtime desc;`
   return await sqlExecutor(sql)
 }
 
