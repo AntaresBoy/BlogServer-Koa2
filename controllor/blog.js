@@ -71,7 +71,7 @@ const updateBlog = async (blogData = {}) => {
   const tags = blogData.tags
   const overview=blogData.overview
   if (title && content && contentId) {
-    const sql = `update ${DB_NAME.blogs} set title="${title}",tags="${tags}", content="${content}", "overview"="${overview}" where contentId="${contentId}";`
+    const sql = `update ${DB_NAME.blogs} set title="${title}",tags="${tags}", content="${content}", overview="${overview}" where contentId="${contentId}";`
     const result = await sqlExecutor(sql)
     console.log("blogData:", blogData)
     console.log("result:", result, sql)
