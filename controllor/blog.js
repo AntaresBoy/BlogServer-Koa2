@@ -13,7 +13,7 @@ const {
 
 //根据当前用户获取该用户所有文章列表
 const getList = async (author, keyword) => {
-  let sql = `select id,title,createtime,author,tags,contentId,content from ${DB_NAME.blogs} where 1=1 `
+  let sql = `select id,title,createtime,author,tags,contentId,content,overview from ${DB_NAME.blogs} where 1=1 `
   if (author) {
     sql += `and author="${author}" `
   }
@@ -50,9 +50,10 @@ const newBlog = async (newBlogData) => {
   const author = newBlogData.author
   const createtime = getYMDHMS(Date.now())
   const tags = newBlogData.tags
+  const overview =newBlogData.overview
   const contentId = buildUUID()
-  const sql = `insert into ${DB_NAME.blogs} (title,content,createtime,author,tags,contentId)
-  values ("${title}","${content}","${createtime}","${author}","${tags}","${contentId}");
+  const sql = `insert into ${DB_NAME.blogs} (title,content,createtime,author,tags,contentId,overview)
+  values ("${title}","${content}","${createtime}","${author}","${tags}","${contentId}","${overview}");
   `
   console.log("newBlogData:", newBlogData)
   const result = await sqlExecutor(sql)
@@ -68,8 +69,9 @@ const updateBlog = async (blogData = {}) => {
   const content = toLiteral(blogData.content)
   const contentId = blogData.contentId
   const tags = blogData.tags
+  const overview=blogData.overview
   if (title && content && contentId) {
-    const sql = `update ${DB_NAME.blogs} set title="${title}",tags="${tags}", content="${content}" where contentId="${contentId}";`
+    const sql = `update ${DB_NAME.blogs} set title="${title}",tags="${tags}", content="${content}", "overview"="${overview}" where contentId="${contentId}";`
     const result = await sqlExecutor(sql)
     console.log("blogData:", blogData)
     console.log("result:", result, sql)
